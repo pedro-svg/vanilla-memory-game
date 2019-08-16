@@ -1,20 +1,14 @@
-main{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 *{
+  background-color: #ff4d4d;
   box-sizing: border-box;
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
 }
 
-main{
-  height: 80%;
-  background-color: #ff4d4d;
+main , nav{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -22,18 +16,53 @@ main{
 .card{
   height:25vh;
   width: 20vw;
-
   filter: brightness(0%);
-  transition: all 0.5s ease-in;
-  margin: 5px;
+  transition: all 0.3s ease-in;
+  margin: 10px;
 }
 
 .showCard{
-  transition: all 0.5s ease-out;
+  transition: all 0.3s ease-out;
   filter: brightness(100%);
 }
-/* ------------------ */
 
 img:hover{
   cursor: pointer;
+  transform: scale(1.03);
 }
+
+i{
+  background-color: inherit;
+  border-radius: 25px;
+}
+
+button {
+  height: 50px;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  outline: none; 
+  border-radius: 25px;
+}
+
+button:hover , i:hover{
+  transition:0.5s;
+  font-size: 1.5rem;
+}
+
+button:active ,i:active{
+  transition:0.5s;
+  background-color: rgba(236, 210, 91, 0.822);
+}
+
+
+nav{
+  height: 8vh;
+}
+
+nav span{
+  padding: 0 15px;
+}
+
+ 
+
