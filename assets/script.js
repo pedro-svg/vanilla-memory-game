@@ -1,18 +1,15 @@
 const cardList = document.querySelectorAll('.card');
+let virouAlgumaCarta, bloquearClick = false;
+let cartaUm, cartaDois;
+let matches, i = 0;
 
-const src = [
-  "./assets/noir.jpg", "./assets/peni.jpg", "./assets/peter.jpg", "./assets/porco.png", "./assets/gwen.jpg", "./assets/miles.jpg", "./assets/gwen.jpg", "./assets/peter.jpg", "./assets/porco.png", "./assets/noir.jpg", "./assets/miles.jpg", "./assets/peni.jpg"
-]
+const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-
-let virouAlgumaCarta = false
-let cartaUm, cartaDois
-let bloquearClick = false
-let matches = 0
-
+const shuffle = _ => {
+  cardList.forEach(card => card.style.order = random(0, 12))
+}
 
 function viraCarta() {
-
   if (bloquearClick) return;
   if (this === cartaUm) return;
 
@@ -24,60 +21,37 @@ function viraCarta() {
   } else {
     virouAlgumaCarta = false
     cartaDois = this
-    saoIguais()
+    compararCard()
   }
 }
 
-function placar(){
-  document.querySelector('[data-js="encontrados"]').innerHTML = matches + ` match`
-  if (matches == 6)  document.querySelector('[data-js="status"]').innerHTML = 'venceu'
+function mudarPlacar() {
+  document.querySelector('[data-js="encontrados"]').innerHTML = matches + ` matches`
+  if (matches == 6) document.querySelector('[data-js="status"]').innerHTML = 'venceu'
 }
 
 
-function saoIguais() {
+function compararCard() {
   if (cartaUm.src === cartaDois.src) {
     matches += 1
-    placar()
+    mudarPlacar()
     cartaUm.removeEventListener('click', viraCarta)
     cartaDois.removeEventListener('click', viraCarta)
   } else {
-    console.log('errou')
-    bloquearClick = true
-    esconderCarta()
+    bloquearClick = true;
+    esconderCarta();
   }
 }
 
-function resetarJogo() {
-  [virouAlgumaCarta] = [false]
-  [cartaUm, cartaDois] = [null, null]
-}
-
 function esconderCarta() {
-  setTimeout(() => {
+  setTimeout( _ => {
     cartaUm.classList.remove('showCard')
     cartaDois.classList.remove('showCard')
     bloquearClick = false
   }, 1000)
 }
-let i = 0
-
- cardList.forEach(function(box) {
-  box.src = src[i];
-  i++;
-});
-
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function shuffle() {
-   cardList.forEach(box => {
-    box.style.order = random(0, 12);
-  });
-}
-
 
 window.onload = shuffle();
-document.querySelector('[data-js="restart-btn"]').addEventListener('click' , function(){location.reload()})
+document.querySelector('[data-js="restart-btn"]').addEventListener('click', _ => location.reload())
 document.querySelector('[data-js="shuffle-btn"]').addEventListener('click', shuffle)
 cardList.forEach(card => card.addEventListener('click', viraCarta))
