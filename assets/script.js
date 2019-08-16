@@ -7,9 +7,9 @@ const src = [
 
 let virouAlgumaCarta = false
 let cartaUm, cartaDois
-
-
 let bloquearClick = false
+let matches = 0
+
 
 function viraCarta() {
 
@@ -28,9 +28,16 @@ function viraCarta() {
   }
 }
 
+function placar(){
+  document.querySelector('[data-js="encontrados"]').innerHTML = matches + ` match`
+  if (matches == 6)  document.querySelector('[data-js="status"]').innerHTML = 'venceu'
+}
+
+
 function saoIguais() {
   if (cartaUm.src === cartaDois.src) {
-    console.log('encontrou')
+    matches += 1
+    placar()
     cartaUm.removeEventListener('click', viraCarta)
     cartaDois.removeEventListener('click', viraCarta)
   } else {
@@ -69,7 +76,8 @@ function shuffle() {
   });
 }
 
+
 window.onload = shuffle();
-
-
+document.querySelector('[data-js="restart-btn"]').addEventListener('click' , function(){location.reload()})
+document.querySelector('[data-js="shuffle-btn"]').addEventListener('click', shuffle)
 cardList.forEach(card => card.addEventListener('click', viraCarta))
