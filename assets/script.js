@@ -1,7 +1,7 @@
 const cardList = document.querySelectorAll('.card');
-let virouAlgumaCarta, bloquearClick = false;
+let virouAlgumaCarta = false, bloquearClick = false;
 let cartaUm, cartaDois;
-let matches, i = 0;
+let matches = 0, i = 0;
 
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
